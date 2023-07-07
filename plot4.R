@@ -25,28 +25,25 @@ for(i in 1:length(pts)){
   sub_metering_2 <- c(sub_metering_2, as.numeric(pts[[i]][8]))
   sub_metering_3 <- c(sub_metering_3, as.numeric(pts[[i]][9]))
 }
-weekday <- c()
+datetime <- c()
 for(i in 1:length(date)){
-  if(date[1] == "1/2/2007"){
-    weekday <- c(weekday, "Thu")
-  }else{
-    weekday <- c(weekday, "Fri")
-  }
+  val <- paste(as.Date(date[i], tryFormats = "%d/%m/%Y"), time[i])
+  datetime <- c(datetime, val)
 }
 par(mfrow = c(2, 2))
-plot(x = 1:length(weekday), y = global_active_power, type = "l",
+plot(x = as.POSIXct(datetime), y = global_active_power, type = "l",
      ylab = "Global Active Power (kilowatts)", xlab = "")
 
-plot(x = 1:length(weekday), y = voltage, type = "l",
+plot(x = as.POSIXct(datetime), y = voltage, type = "l",
      ylab = "Voltage", xlab = "datetime")
 
-plot(x = 1:length(weekday), y = sub_metering_1, type = "l", col = "black", 
+plot(x = as.POSIXct(datetime), y = sub_metering_1, type = "l", col = "black", 
      ylab = "Energy sub metering", xlab = "")
-points(x = 1:length(weekday), y = sub_metering_2, type = "l", col = "red")
-points(x = 1:length(weekday), y = sub_metering_3, type = "l", col = "blue")
+points(x = as.POSIXct(datetime), y = sub_metering_2, type = "l", col = "red")
+points(x = as.POSIXct(datetime), y = sub_metering_3, type = "l", col = "blue")
 legend("topright", legend = c("sub_metering_1,", "sub_metering_2", 
                               "sub_metering_3"),
        col = c("black", "red", "blue"), lty = c(1, 1, 1), cex = 0.7)
 
-plot(x = 1:length(weekday), y = global_reactive_power, type = "l",
+plot(x = as.POSIXct(datetime), y = global_reactive_power, type = "l",
      ylab = "Global_reactive_power", xlab = "datetime")
