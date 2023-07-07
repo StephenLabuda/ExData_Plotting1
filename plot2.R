@@ -25,14 +25,10 @@ for(i in 1:length(pts)){
   sub_metering_2 <- c(sub_metering_2, as.numeric(pts[[i]][8]))
   sub_metering_3 <- c(sub_metering_3, as.numeric(pts[[i]][9]))
 }
-weekday <- c()
+datetime <- c()
 for(i in 1:length(date)){
-  if(date[1] == "1/2/2007"){
-    weekday <- c(weekday, "Thu")
-  }else{
-    weekday <- c(weekday, "Fri")
-  }
+  val <- paste(as.Date(date[i], tryFormats = "%d/%m/%Y"), time[i])
+  datetime <- c(datetime, val)
 }
-plot(x = 1:length(weekday), y = global_active_power, type = "l",
+plot(x = as.POSIXct(datetime), y = global_active_power, type = "l",
      ylab = "Global Active Power (kilowatts)", xlab = "")
-
