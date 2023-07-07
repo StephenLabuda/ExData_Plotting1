@@ -32,8 +32,8 @@ for(i in 1:length(date)){
 }
 plot(x = as.POSIXct(datetime), y = sub_metering_1, type = "l", col = "black", 
      ylab = "Energy sub metering", xlab = "")
-points(x = 1:length(weekday), y = sub_metering_2, type = "l", col = "red")
-points(x = 1:length(weekday), y = sub_metering_3, type = "l", col = "blue")
+points(x = as.POSIXct(datetime), y = sub_metering_2, type = "l", col = "red")
+points(x = as.POSIXct(datetime), y = sub_metering_3, type = "l", col = "blue")
 legend("topright", legend = c("sub_metering_1,", "sub_metering_2", 
                               "sub_metering_3"),
        col = c("black", "red", "blue"), lty = c(1, 1, 1))
